@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 pandas = "*"
 click = "*"
+selenium = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
