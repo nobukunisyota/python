@@ -8,16 +8,24 @@
     <title>ログイン</title>
 </head>
 <body>
-    <form method="POST">{% csrf_token %}
-        <p>
-            <inout>ユーザー名</inout>
-        </p>
-        <p>
-            <inou>パスワード</inou>
-        </p>
-        <p>
-            <button type="submit">ログイン</button>
-        </p>
-    </form>
+    <div class="main">
+        <form method="POST">{% csrf_token %}
+            <div class="input-form">
+                <label for="username">おなまえ :</label>
+                <input type="text" name="username" required="required" placeholder="ユーザー名" id="username">
+            </div>
+            <div class="input-form">
+                <label for="password">あいことば :</label>
+                <input type="text" name="password" required="required" placeholder="パスワード" id="password">
+            </div>
+            <div class="login-button">
+                <input type="submit" class="button" value="冒険の書を読み込む">
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <p><a href="{% url 'signup' %}">冒険は初めてか？</a></p>
+        <p><a href="{% url 'reset' %}">自分のことが思い出せないのか？</a></p>
+    </div>
 </body>
 </html>
