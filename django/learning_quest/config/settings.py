@@ -109,8 +109,8 @@ USE_L10N = True
 USE_TZ = True
 
 # login setting
-LOGIN_URL = 'app:login'
-LOGIN_REDIRECT_URL = 'app:top'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'top'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
