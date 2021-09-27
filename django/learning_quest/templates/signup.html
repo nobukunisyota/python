@@ -9,5 +9,10 @@
 </head>
 <body>
     <p>アカウント作成画面</p>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">ユーザー登録</button>
+    </form>
 </body>
 </html>
