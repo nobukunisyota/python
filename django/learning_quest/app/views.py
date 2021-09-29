@@ -2,6 +2,8 @@ from django.views.generic import TemplateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Site Top
@@ -26,8 +28,14 @@ def signup_function(request):
     return render(request, 'templates/signup.html', {'form': form})
 
 
+# logout
+def logout_function(request):
+    logout(request)
+    return render(request, 'templates/login.html')
+
+
 # Username/Password Reset
-class TopView(TemplateView):
+class TopView(LoginRequiredMixin, TemplateView):
     template_name = 'templates/topview.html'
 
 
