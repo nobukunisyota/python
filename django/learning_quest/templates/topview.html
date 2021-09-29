@@ -1,19 +1,20 @@
-<!doctype html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TopView</title>
-</head>
-<body>
-    <div class="header">
-        <p><a href="{% url 'logout' %}">冒険を終了する</a></p>
-    </div>
-    <div class="main">
-        <p>トップ画面</p>
-    </div>
-    <div class="footer"></div>
-</body>
-</html>
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>TopView</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="header">
+    <p><a href="{% url 'logout' %}">冒険を終了する</a></p>
+</div>
+
+<div class="container">
+    <p>トップ画面</p>
+</div>
+
+<div class="footer"></div>
+
+{% endblock content%}

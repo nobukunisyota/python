@@ -1,13 +1,18 @@
-<!doctype html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ユーザー名・パスワード変更画面</title>
-</head>
-<body>
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>ユーザー名・パスワード変更画面</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="header"></div>
+
+<div class="container">
     <p>ユーザー名・パスワード変更画面</p>
-</body>
-</html>
+</div>
+
+<div class="footer"></div>
+
+{% endblock content%}

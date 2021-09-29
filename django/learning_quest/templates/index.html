@@ -1,27 +1,23 @@
-<!doctype html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LearningQuest</title>
-</head>
-<body>
-    <div class="header-context">
+{% extends 'templates/base.html' %}
+{% load static %}
 
-    </div>
-    <div class="main-context">
-        <div class="menu-context">
-            <p>Learning Quest</p>
-            <a href="{% url 'signup' %}">学習の書を作成する</a>
-        </div>
-        <div class="menu-context">
-            <a href="{% url 'login' %}">学習を再開する</a>
-        </div>
-    </div>
-    <div class="footer-context">
+{% block title %}
+<title>LearningQuest</title>
+{% endblock title %}
 
-    </div>
-</body>
-</html>
+{% block content %}
+
+<div class="header"></div>
+
+<div class="container">
+    <p>Learning Quest</p>
+    <a href="{% url 'signup' %}">学習の書を作成する</a>
+    <a href="{% url 'login' %}">学習を再開する</a>
+</div>
+
+<div class="footer"></div>
+
+{% endblock content%}
+
+
+
