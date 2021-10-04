@@ -1,9 +1,10 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import RewardTable, StudyTime
 
 
 # Site Top
@@ -18,10 +19,10 @@ def signup_function(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
+            password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('top')
+            return render(request, 'templates/topview.html', {'user': user})
     else:
         form = UserCreationForm()
 
@@ -34,9 +35,20 @@ def logout_function(request):
     return render(request, 'templates/login.html')
 
 
-# Username/Password Reset
-class TopView(LoginRequiredMixin, TemplateView):
+# Main View
+class TopView(LoginRequiredMixin, ListView):
     template_name = 'templates/topview.html'
+    model = RewardTable
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'study_time': StudyTime.objects.all()
+        })
+        return context
+
+    def get_queryset(self):
+        return RewardTable.objects.all()
 
 
 # Username/Password Reset

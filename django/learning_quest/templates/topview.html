@@ -12,7 +12,28 @@
 </div>
 
 <div class="container">
-    <p>トップ画面</p>
+    <ul>
+        <p>こんにちは{{user}}さん</p>
+        <p>今日も勉強頑張りましょう!!</p>
+        {% for reward in object_list %}
+            {% if reward.username == user %}
+                <div>
+                    <span>
+                        報酬 : {{reward.reward}}
+                    </span>
+                    <span>
+                        必要時間 : {{reward.reward_required_time}}
+                    </span>
+                </div>
+            {% endif %}
+        {% endfor %}
+        {% for time in study_time %}
+            {% if time.username == user %}
+                <p>合計学習時間</p>
+                {{time.total_time}}
+            {% endif %}
+        {% endfor %}
+    </ul>
 </div>
 
 <div class="footer"></div>
