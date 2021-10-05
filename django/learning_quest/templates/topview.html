@@ -5,6 +5,10 @@
 <title>TopView</title>
 {% endblock title %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/topview_stylesheet.css' %}">
+{% endblock css %}
+
 {% block content %}
 
 <div class="header">
@@ -34,6 +38,9 @@
             {% endif %}
         {% endfor %}
     </ul>
+    {% block js %}
+    <script src="{% static 'js/decide_current_reward.js' %}"></script>
+    {% endblock js %}
 </div>
 
 <div class="footer"></div>
