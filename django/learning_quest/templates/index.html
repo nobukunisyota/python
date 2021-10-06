@@ -14,9 +14,15 @@
 <div class="header"></div>
 
 <div class="container">
-    <p>Learning Quest</p>
-    <a href="{% url 'signup' %}">学習の書を作成する</a>
-    <a href="{% url 'login' %}">学習を再開する</a>
+    <h2 class="title">Learning Quest</h2>
+    <div class="menu">
+        <div>
+            <a href="{% url 'signup' %}">学習の書を作成する</a>
+        </div>
+        <div>
+            <a href="{% url 'login' %}">学習を再開する</a>
+        </div>
+    </div>
 </div>
 
 <div class="footer"></div>

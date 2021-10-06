@@ -1,0 +1,10 @@
+.title {
+  text-align: center;
+}
+
+.menu {
+  text-align: center;
+  border: solid;
+  width: 500px;
+  margin-left: auto;
+}
