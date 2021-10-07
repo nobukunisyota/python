@@ -51,6 +51,21 @@ class TopView(LoginRequiredMixin, ListView):
         return RewardTable.objects.all()
 
 
+class SettingView(ListView):
+    template_name = 'templates/setting.html'
+    model = RewardTable
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'study_time': StudyTime.objects.all()
+        })
+        return context
+
+    def get_queryset(self):
+        return RewardTable.objects.all()
+
+
 # Username/Password Reset
 class ResetView(TemplateView):
     template_name = 'templates/reset.html'
