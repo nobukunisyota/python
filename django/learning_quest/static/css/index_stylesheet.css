@@ -1,10 +1,13 @@
+.container {
+    position: absolute;
+}
+
 .title {
   text-align: center;
 }
 
 .menu {
   text-align: center;
-  border: solid;
-  width: 500px;
-  margin-left: auto;
+  position: relative;
+  top: 50px;
 }
