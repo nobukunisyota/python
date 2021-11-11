@@ -3,25 +3,25 @@
 
 import os
 import re
-import sys
-import tarfile
 import argparse
+import subprocess
+
 
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--filename")
     return parser.parse_args()
 
+
 def files(filename):
     return os.listdir(filename)
 
+
 def decompress(filepath):
     try:
-        with tarfile.open(filepath, 'w|') as tar:
-            tar.extractall(path='output')
-    except tarfile.TarError:
-        print("tar file open error occur")
-        pass
+        subprocess.run(["tar", "-zxvf", filepath], check=True)
+    except subprocess.CalledProcessError:
+        print("error occur")
 
 
 def main():
@@ -31,6 +31,7 @@ def main():
         if not m:
             continue
         decompress(os.path.join(os.getcwd(), file))
+
 
 if __name__ == "__main__":
     main()
