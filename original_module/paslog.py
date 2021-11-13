@@ -1,8 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding=utf-8
 
 import os
-import re
 import argparse
 import subprocess
 
@@ -13,24 +12,37 @@ def get_args():
     return parser.parse_args()
 
 
-def files(filename):
-    return os.listdir(filename)
+def files_grep_extention(filename, extention):
+    return [_ for _ in os.listdir(filename) if _.endswith(extention)]
 
 
-def decompress(filepath):
+def do_decompress(filepath):
     try:
-        subprocess.run(["tar", "-zxvf", filepath], check=True)
+        subprocess.run(["gzip", "-dvkf", filepath], check=True)
     except subprocess.CalledProcessError:
-        print("error occur")
+        print(f"error occur at {filepath}")
+
+
+def output(filepath):
+    try:
+        subprocess.run(["tar", "-zxOf", filepath], check=True)
+    except subprocess.CalledProcessError:
+        print(f"error occur at {filepath}")
+
+
+def paslog(args):
+    # decompose paslog from tar.gz to tar
+    for file in files_grep_extention(args.filename, r".tar.gz"):
+        do_decompress(os.path.join(args.filename, file))
+
+    # grep paslog keyword
+    for file in files_grep_extention(args.filename, r".tar"):
+        output(os.path.join(args.filename, file))
 
 
 def main():
     args = get_args()
-    for file in files(args.filename):
-        m = re.match('.*tar.gz$', file)
-        if not m:
-            continue
-        decompress(os.path.join(os.getcwd(), file))
+    paslog(args)
 
 
 if __name__ == "__main__":
