@@ -6,43 +6,53 @@ import argparse
 import subprocess
 
 
+class Paslog:
+    """
+    module for paslog analyze
+    """
+
+    def __init__(self, filename=None):
+        self.filename = filename
+
+    def files_grep_extention(self, extention):
+        return [_ for _ in os.listdir(self.filename) if _.endswith(extention)]
+
+    @classmethod
+    def do_decompress(cls, filepath):
+        try:
+            subprocess.run(["gzip", "-dvkf", filepath], check=True)
+        except subprocess.CalledProcessError:
+            print(f"error occur at {filepath}")
+
+    @classmethod
+    def output(cls, filepath):
+        try:
+            subprocess.run(["tar", "-zxOf", filepath], check=True)
+        except subprocess.CalledProcessError:
+            print(f"error occur at {filepath}")
+
+    def to_text(self):
+        # decompose paslog from tar.gz to tar
+        for file in self.files_grep_extention(self.filename, r".tar.gz"):
+            self.do_decompress(os.path.join(self.filename, file))
+
+        # grep paslog keyword
+        for file in self.files_grep_extention(self.filename, r".tar"):
+            self.output(os.path.join(self.filename, file))
+
+
+# local debug !!
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--filename")
+    parser.add_argument("-m", "--mode")
     return parser.parse_args()
-
-
-def files_grep_extention(filename, extention):
-    return [_ for _ in os.listdir(filename) if _.endswith(extention)]
-
-
-def do_decompress(filepath):
-    try:
-        subprocess.run(["gzip", "-dvkf", filepath], check=True)
-    except subprocess.CalledProcessError:
-        print(f"error occur at {filepath}")
-
-
-def output(filepath):
-    try:
-        subprocess.run(["tar", "-zxOf", filepath], check=True)
-    except subprocess.CalledProcessError:
-        print(f"error occur at {filepath}")
-
-
-def paslog(args):
-    # decompose paslog from tar.gz to tar
-    for file in files_grep_extention(args.filename, r".tar.gz"):
-        do_decompress(os.path.join(args.filename, file))
-
-    # grep paslog keyword
-    for file in files_grep_extention(args.filename, r".tar"):
-        output(os.path.join(args.filename, file))
 
 
 def main():
     args = get_args()
-    paslog(args)
+    paslog_obj = Paslog(args.filename)
+    paslog_obj.to_text()
 
 
 if __name__ == "__main__":
