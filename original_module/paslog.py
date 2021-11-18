@@ -11,18 +11,16 @@ class Paslog:
     module for paslog analyze
     """
 
-
     def __init__(self, filename=None):
         self.filename = filename
-
 
     """
     Filter files by extension
     """
+
     def files_grep_extention(self, extention):
         return [_ for _ in os.listdir(self.filename) if _.endswith(extention)]
 
-    
     """
     do decompose
     """
@@ -32,7 +30,6 @@ class Paslog:
             subprocess.run(["gzip", "-dvkf", filepath], check=True)
         except subprocess.CalledProcessError:
             print(f"error occur at {filepath}")
-
 
     """
     decompose context in text
@@ -44,11 +41,12 @@ class Paslog:
         except subprocess.CalledProcessError:
             print(f"error occur at {filepath}")
 
-
     """
     main method
     """
+
     def to_text(self):
+        ret_val = False
         # decompose paslog from tar.gz to tar
         for file in self.files_grep_extention(self.filename, r".tar.gz"):
             self.do_decompress(os.path.join(self.filename, file))
@@ -56,4 +54,12 @@ class Paslog:
         # grep paslog keyword
         for file in self.files_grep_extention(self.filename, r".tar"):
             self.output(os.path.join(self.filename, file))
+        ret_val = True
+        return ret_val
 
+
+def test_paslog():
+    # check obj return
+    obj = Paslog(os.getcwd())
+    obj_ret = obj.to_text()
+    assert True == obj_ret
