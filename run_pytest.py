@@ -14,5 +14,4 @@ def test_paslog_module():
 
 
 if __name__ == "__main__":
-    if(test_paslog_module()):
-        print("Succuss test_paslog_module !!")
+    test_paslog_module()
