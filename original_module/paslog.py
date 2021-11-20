@@ -26,7 +26,7 @@ class Paslog:
     @classmethod
     def do_decompress(cls, filepath):
         try:
-            subprocess.run(["gzip", "-dvkf", filepath], check=True)
+            subprocess.run(["ip", "-dvkf", filepath], check=True)
         except subprocess.CalledProcessError:
             print(f"error occur at {filepath}")
 
