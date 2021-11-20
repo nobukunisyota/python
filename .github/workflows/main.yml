@@ -17,9 +17,6 @@ jobs:
         with:
           token: ${{secrets.GITHUB_TOKEN}}
       
-      - name: debug
-        run: ls -l
-      
       - name: check pyhon version 
         run: python --version
 
@@ -31,4 +28,4 @@ jobs:
         run: pip install pytest
 
       - name: Test with pytest
-        run: python run_pytest.py
+        run: pytest run_pytest.py
