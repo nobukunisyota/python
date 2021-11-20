@@ -10,7 +10,9 @@ def test_paslog_module():
     obj = paslog.Paslog(os.getcwd())
     obj_ret = obj.to_text()
     assert True == obj_ret
+    return True
 
 
 if __name__ == "__main__":
-    test_paslog_module()
+    if(test_paslog_module()):
+        print("Succuss test_paslog_module !!")
