@@ -19,6 +19,9 @@ jobs:
       
       - name: debug
         run: ls -l
+      
+      - name: check pyhon version 
+        run: python --version
 
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -28,4 +31,4 @@ jobs:
         run: pip install pytest
 
       - name: Test with pytest
-        run: pytest
+        run: python run_pytest.py
