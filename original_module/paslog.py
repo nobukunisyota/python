@@ -2,7 +2,6 @@
 # coding=utf-8
 
 import os
-import argparse
 import subprocess
 
 
@@ -42,24 +41,17 @@ class Paslog:
             print(f"error occur at {filepath}")
 
     """
-    main method
+    paslog to text
     """
 
     def to_text(self):
         ret_val = False
         # decompose paslog from tar.gz to tar
-        for file in self.files_grep_extention(self.filename, r".tar.gz"):
+        for file in self.files_grep_extention(r".tar.gz"):
             self.do_decompress(os.path.join(self.filename, file))
 
         # grep paslog keyword
-        for file in self.files_grep_extention(self.filename, r".tar"):
+        for file in self.files_grep_extention(r".tar"):
             self.output(os.path.join(self.filename, file))
         ret_val = True
         return ret_val
-
-
-def test_paslog():
-    # check obj return
-    obj = Paslog(os.getcwd())
-    obj_ret = obj.to_text()
-    assert True == obj_ret
