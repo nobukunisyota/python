@@ -27,10 +27,9 @@ class Paslog:
     @classmethod
     def do_decompress(cls, filepath):
         try:
-            subprocess.run(["ip", "-dvkf", filepath], check=True)
+            subprocess.run(["gzip", "-dvkf", filepath], check=True)
         except subprocess.CalledProcessError:
             print(f"error occur at {filepath}")
-            sys.exit(1)
 
     """
     decompose context in text
@@ -41,7 +40,6 @@ class Paslog:
             subprocess.run(["tar", "-zxOf", filepath], check=True)
         except subprocess.CalledProcessError:
             print(f"error occur at {filepath}")
-            sys.exit(1)
 
     """
     paslog to text
